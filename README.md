@@ -1,1 +1,26 @@
 # ssm-web
+SpringMVC+Spring+MyBatis+Druid+PostgreSQL+AdminLTE+Maven+Motan
+
+##  介绍
+
+### ssm-blank
+空框架
+
+### ssm-admin [开发中]
+带有基本权限管理模块
+
+### ssm-motan-web [计划中]
+ssm-admin 基于motan剥离的前端
+
+### ssm-motan-module [计划中]
+ssm-admin 基于motan剥离的服务端
+
+##  开发环境
+```
+jdk1.7.0_80
+apache-maven-3.5.0
+IntelliJ IDEA Community Edition 2017.1.4 x64
+```
+
+##  联系我
+如有建议和意见 请联系我 一起探讨探讨 互相学习
