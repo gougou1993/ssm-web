@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jxh.ssm.mapper.SeRoleMapper">
+
+	<resultMap id="SeRole" type="cn.jxh.ssm.entity.SeRole">
+		<result property="id" column="id"/>
+		<result property="rolecode" column="rolecode"/>
+		<result property="roledesc" column="roledesc"/>
+		<result property="content" column="content"/>
+		<result property="visible" column="visible"/>
+		<result property="entrytime" column="entrytime"/>
+		<result property="updatetime" column="updatetime"/>
+		<result property="updateid" column="updateid"/>
+	</resultMap>
+	
+	
+
+
+	<insert id="insert" parameterType="cn.jxh.ssm.entity.SeRole" useGeneratedKeys="true" keyProperty="id">
+		insert into se_role ( 
+			<trim prefixOverrides=",">
+			<if test="id != null"> ,id </if>	
+			<if test="rolecode != null"> ,rolecode </if>	
+			<if test="roledesc != null"> ,roledesc </if>	
+			<if test="content != null"> ,content </if>	
+			<if test="visible != null"> ,visible </if>	
+			<if test="entrytime != null"> ,entrytime </if>	
+			<if test="updatetime != null"> ,updatetime </if>	
+			<if test="updateid != null"> ,updateid </if>	
+			</trim>
+		) values (
+			<trim prefixOverrides=",">
+			<if test="id != null"> ,#{id} </if>		       
+			<if test="rolecode != null"> ,#{rolecode} </if>		       
+			<if test="roledesc != null"> ,#{roledesc} </if>		       
+			<if test="content != null"> ,#{content} </if>		       
+			<if test="visible != null"> ,#{visible} </if>		       
+			<if test="entrytime != null"> ,#{entrytime} </if>		       
+			<if test="updatetime != null"> ,#{updatetime} </if>		       
+			<if test="updateid != null"> ,#{updateid} </if>		       
+			</trim>
+		)
+	</insert>
+	
+	<delete id="delete">  
+		delete from se_role
+		where id = #{id}
+	</delete>
+	
+	<update id="update" parameterType="cn.jxh.ssm.entity.SeRole">  
+		update se_role        
+		<set>
+			<if test="id != null"> id = #{id}, </if>
+			<if test="rolecode != null"> rolecode = #{rolecode}, </if>
+			<if test="roledesc != null"> roledesc = #{roledesc}, </if>
+			<if test="content != null"> content = #{content}, </if>
+			<if test="visible != null"> visible = #{visible}, </if>
+			<if test="entrytime != null"> entrytime = #{entrytime}, </if>
+			<if test="updatetime != null"> updatetime = #{updatetime}, </if>
+			<if test="updateid != null"> updateid = #{updateid}, </if>
+		</set>
+		where id = #{id}
+	</update>
+	
+	<select id="get" parameterType="java.util.Map" resultMap="SeRole">  
+		select 
+			id,
+			rolecode,
+			roledesc,
+			content,
+			visible,
+			entrytime,
+			updatetime,
+			updateid
+		from se_role
+		<where>
+			<if test="id != null"> and id = #{id} </if>
+			<if test="rolecode != null"> and rolecode = #{rolecode} </if>
+			<if test="roledesc != null"> and roledesc = #{roledesc} </if>
+			<if test="content != null"> and content = #{content} </if>
+			<if test="visible != null"> and visible = #{visible} </if>
+			<if test="entrytime != null"> and entrytime = #{entrytime} </if>
+			<if test="updatetime != null"> and updatetime = #{updatetime} </if>
+			<if test="updateid != null"> and updateid = #{updateid} </if>
+		</where>
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultMap="SeRole">  
+		select 
+			id,
+			rolecode,
+			roledesc,
+			content,
+			visible,
+			entrytime,
+			updatetime,
+			updateid
+		from se_role
+		<where>
+			<if test="id != null"> and id = #{id} </if>
+			<if test="rolecode != null"> and rolecode = #{rolecode} </if>
+			<if test="roledesc != null"> and roledesc = #{roledesc} </if>
+			<if test="content != null"> and content = #{content} </if>
+			<if test="visible != null"> and visible = #{visible} </if>
+			<if test="entrytime != null"> and entrytime = #{entrytime} </if>
+			<if test="updatetime != null"> and updatetime = #{updatetime} </if>
+			<if test="updateid != null"> and updateid = #{updateid} </if>
+		</where>
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="java.lang.Integer">  
+		select count(*) from se_role
+		<where>
+			<if test="id != null"> and id = #{id} </if>
+			<if test="rolecode != null"> and rolecode = #{rolecode} </if>
+			<if test="roledesc != null"> and roledesc = #{roledesc} </if>
+			<if test="content != null"> and content = #{content} </if>
+			<if test="visible != null"> and visible = #{visible} </if>
+			<if test="entrytime != null"> and entrytime = #{entrytime} </if>
+			<if test="updatetime != null"> and updatetime = #{updatetime} </if>
+			<if test="updateid != null"> and updateid = #{updateid} </if>
+		</where>
+	</select>
+
+
+	<select id="getSplitList" parameterType="java.util.Map" resultMap="SeRole" >  
+		select 
+			id,
+			rolecode,
+			roledesc,
+			content,
+			visible,
+			entrytime,
+			updatetime,
+			updateid
+		from se_role
+		<where>
+			<if test="id != null"> and id = #{id} </if>
+			<if test="rolecode != null"> and rolecode = #{rolecode} </if>
+			<if test="roledesc != null"> and roledesc = #{roledesc} </if>
+			<if test="content != null"> and content = #{content} </if>
+			<if test="visible != null"> and visible = #{visible} </if>
+			<if test="entrytime != null"> and entrytime = #{entrytime} </if>
+			<if test="updatetime != null"> and updatetime = #{updatetime} </if>
+			<if test="updateid != null"> and updateid = #{updateid} </if>
+		</where>
+		limit #{pagesize} offset #{startrow} 
+	</select>
+
+</mapper>
