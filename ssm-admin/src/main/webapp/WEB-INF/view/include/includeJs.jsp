@@ -8,11 +8,11 @@
 <!-- Bootstrap WYSIHTML5 -->
 <script src="resources/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 
-<!-- AdminLTE App -->
-<script src="resources/dist/js/app.min.js"></script>
+<!-- Slimscroll -->
+<script src="resources/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="resources/dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE App -->
+<script src="resources/dist/js/app.js"></script>
 
 <!-- AdminLTE for demo purposes -->
 <script src="resources/dist/js/demo.js"></script>
@@ -39,10 +39,10 @@
 				//data是返回的html对象。
 				//现在我要在这个位置取 页面中的id为test的div
 				$("#center-div").html(data);
-				parent.layer.closeAll('loading');
+				closeLoad();
 			},
 			error : function(XmlHttpRequest, textStatus, errorThrown) {
-				parent.layer.closeAll('loading');
+				closeLoad();
 				showError(XmlHttpRequest, textStatus, errorThrown);
 			}
 		});
@@ -61,12 +61,12 @@
 
 	//操作成功弹出框
 	function showSuccess(msg) {
-		parent.layer.alert(msg, {
+		layer.alert(msg, {
 			icon : 6,
 			skin : 'layui-layer-molv',
 			closeBtn : 0
 		});
-		closeWindows();
+		layer.close();
 	}
 	//操作失败弹出框
 	function showWarm(msg) {
@@ -75,7 +75,7 @@
 			skin : 'layui-layer-lan',
 			closeBtn : 0
 		});
-		closeWindows();
+		layer.close();
 	}
 
 	//操作错误弹出框
@@ -87,7 +87,7 @@
 			skin : 'layui-layer-lan',
 			closeBtn : 0
 		});
-		closeWindows();
+		layer.close();
 	}
 
 </script>
