@@ -6,103 +6,61 @@ import java.util.HashMap;
 import java.util.List;
 
 public class PageProperty implements Serializable {
-    private static final long serialVersionUID = -6960121950113293333L;
-    private int npage;// 页码
-    private int nfirstindex;// 查询起点
-    private int npagesize;// 查询数量，0表示全部
-    private String searchString;// 查询条件 where field=?
-    private String orderString;// 排序条件 order by id desc
-    private List parameterList;// 查询条件参数列表
-    private HashMap<String, Object> paramMap; // 参数map
 
-    public PageProperty(int page, int pagesize, String searchString, String orderString) {
-        this.npagesize = pagesize;
-        this.npage = page;
-        this.searchString = searchString;
-        this.orderString = orderString;
-    }
+    private int startRow;// 查询起点
+    private int pageSize;// 查询数量，0表示全部
+    private String orderColumn;// 排序列
+    private String orderDir;// 排序顺序
+    private HashMap<String, Object> paramMap; // 参数map
+    private int draw;
 
     public PageProperty() {
-        this.npage = 1;
-        this.npagesize = 10;
-        this.nfirstindex = 0;
-        this.searchString = "";
-        this.orderString = "";
+        this.startRow = 0;
+        this.pageSize = 10;
+        this.orderColumn = "";
+        this.orderDir = "";
+        this.draw =0;
     }
 
-    public int getNfirstindex() {
-        nfirstindex = (npage - 1) * npagesize;
-        return nfirstindex;
+    public int getStartRow() {
+        return startRow;
     }
 
-    public void setNfirstindex(int nfirstindex) {
-        this.nfirstindex = nfirstindex;
+    public void setStartRow(int startRow) {
+        this.startRow = startRow;
     }
 
-    public int getNpagesize() {
-        return npagesize;
+    public int getPageSize() {
+        return pageSize;
     }
 
-    public void setNpagesize(int npagesize) {
-        this.npagesize = npagesize;
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
-    public String getOrderString() {
-        return orderString;
+    public String getOrderColumn() {
+        return orderColumn;
     }
 
-    public void setOrderString(String orderString) {
-        this.orderString = orderString;
+    public void setOrderColumn(String orderColumn) {
+        this.orderColumn = orderColumn;
     }
 
-    public String getSearchString() {
-        return searchString;
+    public String getOrderDir() {
+        return orderDir;
     }
 
-    public void setSearchString(String searchString) {
-        this.searchString = searchString;
-    }
-
-    public List getParameterList() {
-        return parameterList;
-    }
-
-    public void setParameterList(List parameterList) {
-        this.parameterList = parameterList;
-    }
-
-    public void addParamter(Object o) {// 增加参数
-        initParameterList();
-        parameterList.add(o);
-    }
-
-    public void addParamter(int index, Object o) { // 增加参数
-        initParameterList();
-        parameterList.add(index, o);
-    }
-
-    public void clearParamter() { // 增加参数
-        initParameterList();
-        parameterList.clear();
-    }
-
-    public void initParameterList() {// 初始化参数列表
-        if (parameterList == null) {
-            parameterList = new ArrayList();
-        }
-    }
-
-    public int getNpage() {
-        return npage;
-    }
-
-    public void setNpage(int page) {
-        npage = page;
+    public void setOrderDir(String orderDir) {
+        this.orderDir = orderDir;
     }
 
     public HashMap<String, Object> getParamMap() {
         initParamMap();
         return paramMap;
+    }
+
+    public void setParamMap(HashMap<String, Object> paramMap) {
+        this.paramMap = paramMap;
     }
 
     public void putParamMap(String name, Object o) { // 增加参数
@@ -121,12 +79,11 @@ public class PageProperty implements Serializable {
         }
     }
 
-    public int getPageStart() {
-        return (npage - 1) * npagesize;
+    public int getDraw() {
+        return draw;
     }
 
-    public int getPageEnd() {
-        return npage * npagesize;
+    public void setDraw(int draw) {
+        this.draw = draw;
     }
-
 }

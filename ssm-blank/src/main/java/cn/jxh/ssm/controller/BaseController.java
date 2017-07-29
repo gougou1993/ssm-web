@@ -2,10 +2,10 @@ package cn.jxh.ssm.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import cn.jxh.ssm.common.constants.SysConstants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import cn.jxh.ssm.common.constants.Constants;
 import cn.jxh.ssm.common.page.PageProperty;
 import cn.jxh.ssm.common.utils.Utils;
 
@@ -31,22 +31,34 @@ public abstract class BaseController   {
         return request.getSession().getAttribute(key);
     }
 
-    protected void setPageInfo(HttpServletRequest req, PageProperty pp) {
-        int pageSizeNum = Constants.PAGE_SIZE_DEFAULT;
-        int pageNum = 1;
-        String pageSizeStr = this.getParameter(req, "pagesize");// 获取每页数据条数
-        System.out.println(pageSizeStr);
-        String pageNumStr = this.getParameter(req, "page");
+    protected void setPageInfo(HttpServletRequest request, PageProperty pp) {
+        int pageSizeNum = SysConstants.PAGE_SIZE_DEFAULT;
 
-        if (!"".equals(pageNumStr)) {
-            pageNum = Utils.parseInt(pageNumStr, 1); // 将字符串数字转化为int型数字,把pageNo传进去，转换为整型，默认为1
-        }
-        if (!"".equals(pageSizeStr)) {
-            pageSizeNum = Utils.parseInt(pageSizeStr, 1);
+        if (!Utils.strIsNull(this.getParameter(request, "start"))) {
+            pp.setStartRow(Integer.parseInt(this.getParameter(request, "start")));
+        }else{
+            pp.setStartRow(0);
         }
 
-        pp.setNpage(pageNum); // 更新页码值
-        pp.setNpagesize(pageSizeNum); // 更新页面查询数量值
+        if (!Utils.strIsNull(this.getParameter(request, "length"))) {
+            pp.setStartRow(Integer.parseInt(this.getParameter(request, "length")));
+        }else{
+            pp.setStartRow(pageSizeNum);
+        }
+
+        if (!Utils.strIsNull(this.getParameter(request, "order[0][column]"))) {
+            String order = this.getParameter(request, "order[0][column]");
+            pp.setOrderDir(this.getParameter(request, "order[0][dir]"));
+            pp.setOrderColumn(this.getParameter(request, "columns["+order+"][data]"));
+        }
+
+        if (!Utils.strIsNull(this.getParameter(request, "draw"))) {
+            pp.setDraw(Integer.parseInt(this.getParameter(request, "draw")));
+        }
+
+        //自带搜索框的值
+        String searchvalue = this.getParameter(request, "search[value]");
+
     }
 
 }

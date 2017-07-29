@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import cn.jxh.ssm.common.page.PageList;
 import cn.jxh.ssm.common.page.PageProperty;
-import cn.jxh.ssm.common.page.PageUtil;
 import cn.jxh.ssm.common.utils.Utils;
 import cn.jxh.ssm.mapper.BaseMapper;
 import cn.jxh.ssm.service.IBaseService;
@@ -50,11 +49,6 @@ public class BaseServiceImpl<T, I extends BaseMapper<T>> implements IBaseService
 
     public PageList<T> getPageList(PageProperty pp) {
         int count = baseMapper.getCount(pp.getParamMap());
-        int start = PageUtil.getStart(pp.getNpage(), count, pp.getNpagesize());
-        int end = PageUtil.getEnd(pp.getNpage(), count, pp.getNpagesize());
-        pp.putParamMap("startrow", start);
-        pp.putParamMap("endrow", end);
-        pp.putParamMap("pageSize", pp.getNpagesize());//mysql鐢ㄥ埌鐨勫弬鏁�
         PageList<T> pageList = new PageList<T>(pp, count, baseMapper.getSplitList(pp.getParamMap()));
         return pageList;
     }
@@ -69,10 +63,6 @@ public class BaseServiceImpl<T, I extends BaseMapper<T>> implements IBaseService
 
     public PageList<Map<String, Object>> getPageMapList(PageProperty pp) {
         int count = baseMapper.getMapCount(pp.getParamMap());
-        int start = PageUtil.getStart(pp.getNpage(), count, pp.getNpagesize());
-        int end = PageUtil.getEnd(pp.getNpage(), count, pp.getNpagesize());
-        pp.putParamMap("startrow", start);
-        pp.putParamMap("endrow", end);
         PageList<Map<String, Object>> pageList = new PageList<Map<String, Object>>(pp, count, baseMapper.getSplitMapList(pp.getParamMap()));
         return pageList;
     }
