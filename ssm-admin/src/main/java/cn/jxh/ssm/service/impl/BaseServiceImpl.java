@@ -49,6 +49,10 @@ public class BaseServiceImpl<T, I extends BaseMapper<T>> implements IBaseService
 
     public PageList<T> getPageList(PageProperty pp) {
         int count = baseMapper.getCount(pp.getParamMap());
+        pp.putParamMap("startrow", pp.getStartRow());
+        pp.putParamMap("pagesize", pp.getPageSize());
+        pp.putParamMap("orderdir", pp.getOrderDir());
+        pp.putParamMap("ordercolumn", pp.getOrderColumn());
         PageList<T> pageList = new PageList<T>(pp, count, baseMapper.getSplitList(pp.getParamMap()));
         return pageList;
     }
@@ -63,6 +67,10 @@ public class BaseServiceImpl<T, I extends BaseMapper<T>> implements IBaseService
 
     public PageList<Map<String, Object>> getPageMapList(PageProperty pp) {
         int count = baseMapper.getMapCount(pp.getParamMap());
+        pp.putParamMap("startrow", pp.getStartRow());
+        pp.putParamMap("pagesize", pp.getPageSize());
+        pp.putParamMap("orderdir", pp.getOrderDir());
+        pp.putParamMap("ordercolumn", pp.getOrderColumn());
         PageList<Map<String, Object>> pageList = new PageList<Map<String, Object>>(pp, count, baseMapper.getSplitMapList(pp.getParamMap()));
         return pageList;
     }

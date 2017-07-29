@@ -9,7 +9,7 @@ import org.apache.commons.logging.LogFactory;
 import cn.jxh.ssm.common.page.PageProperty;
 import cn.jxh.ssm.common.utils.Utils;
 
-public abstract class BaseController   {
+public abstract class BaseController {
 
     protected final Log log = LogFactory.getLog(this.getClass());
 
@@ -31,25 +31,38 @@ public abstract class BaseController   {
         return request.getSession().getAttribute(key);
     }
 
-    protected void setPageInfo(HttpServletRequest request, PageProperty pp) {
+    protected void setPageInfo(HttpServletRequest request, PageProperty pp, String[] enableSorts) {
         int pageSizeNum = SysConstants.PAGE_SIZE_DEFAULT;
 
         if (!Utils.strIsNull(this.getParameter(request, "start"))) {
             pp.setStartRow(Integer.parseInt(this.getParameter(request, "start")));
-        }else{
+        } else {
             pp.setStartRow(0);
         }
 
         if (!Utils.strIsNull(this.getParameter(request, "length"))) {
-            pp.setStartRow(Integer.parseInt(this.getParameter(request, "length")));
-        }else{
-            pp.setStartRow(pageSizeNum);
+            pp.setPageSize(Integer.parseInt(this.getParameter(request, "length")));
+        } else {
+            pp.setPageSize(pageSizeNum);
         }
 
         if (!Utils.strIsNull(this.getParameter(request, "order[0][column]"))) {
             String order = this.getParameter(request, "order[0][column]");
-            pp.setOrderDir(this.getParameter(request, "order[0][dir]"));
-            pp.setOrderColumn(this.getParameter(request, "columns["+order+"][data]"));
+
+            //增加排序列判断 防止SQL注入
+            for (String enableSort : enableSorts) {
+                if (this.getParameter(request, "columns[" + order + "][data]").equals(enableSort.toLowerCase())) {
+                    pp.setOrderColumn(this.getParameter(request, "columns[" + order + "][data]"));
+                    break;
+                }
+            }
+
+            if (this.getParameter(request, "order[0][dir]").equals("desc")) {
+                pp.setOrderDir("desc");
+            } else {
+                pp.setOrderDir("asc");
+            }
+
         }
 
         if (!Utils.strIsNull(this.getParameter(request, "draw"))) {

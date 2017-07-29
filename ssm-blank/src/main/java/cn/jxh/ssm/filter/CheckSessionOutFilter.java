@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cn.jxh.ssm.common.constants.Constants;
+import cn.jxh.ssm.common.constants.SysConstants;
 import cn.jxh.ssm.entity.SessionUser;
 
 /**
@@ -39,7 +39,7 @@ public class CheckSessionOutFilter implements Filter {
             if (!reqPage.trim().equals("/login.do") && !reqPage.trim().equals("/login_out.do")
                     ) {
 
-                person = (SessionUser) hsrq.getSession().getAttribute(Constants.SESSION_USER_KEY);
+                person = (SessionUser) hsrq.getSession().getAttribute(SysConstants.SESSION_USER_KEY);
                 if (person == null) {
                     hsrp.sendRedirect("login.do");
                     return;
