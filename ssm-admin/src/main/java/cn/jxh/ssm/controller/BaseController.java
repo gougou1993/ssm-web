@@ -62,7 +62,6 @@ public abstract class BaseController {
             } else {
                 pp.setOrderDir("asc");
             }
-
         }
 
         if (!Utils.strIsNull(this.getParameter(request, "draw"))) {

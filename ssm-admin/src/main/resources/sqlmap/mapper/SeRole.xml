@@ -12,9 +12,6 @@
 		<result property="updatetime" column="updatetime"/>
 		<result property="updateid" column="updateid"/>
 	</resultMap>
-	
-	
-
 
 	<insert id="insert" parameterType="cn.jxh.ssm.entity.SeRole" useGeneratedKeys="true" keyProperty="id">
 		insert into se_role ( 
@@ -113,7 +110,7 @@
 		<where>
 			<if test="id != null"> and id = #{id} </if>
 			<if test="rolecode != null"> and rolecode = #{rolecode} </if>
-			<if test="roledesc != null"> and roledesc = #{roledesc} </if>
+			<if test="roledesc != null"> and roledesc like concat('%',#{roledesc},'%') </if>
 			<if test="content != null"> and content = #{content} </if>
 			<if test="visible != null"> and visible = #{visible} </if>
 			<if test="entrytime != null"> and entrytime = #{entrytime} </if>
@@ -137,14 +134,17 @@
 		<where>
 			<if test="id != null"> and id = #{id} </if>
 			<if test="rolecode != null"> and rolecode = #{rolecode} </if>
-			<if test="roledesc != null"> and roledesc = #{roledesc} </if>
+			<if test="roledesc != null"> and roledesc like concat('%',#{roledesc},'%') </if>
 			<if test="content != null"> and content = #{content} </if>
 			<if test="visible != null"> and visible = #{visible} </if>
 			<if test="entrytime != null"> and entrytime = #{entrytime} </if>
 			<if test="updatetime != null"> and updatetime = #{updatetime} </if>
 			<if test="updateid != null"> and updateid = #{updateid} </if>
 		</where>
-		limit #{pagesize} offset #{startrow} 
+		<if test="ordercolumn != null and ordercolumn!=''">
+		order by ${ordercolumn} ${orderdir}
+		</if>
+		limit #{pagesize} offset #{startrow}
 	</select>
 
 </mapper>

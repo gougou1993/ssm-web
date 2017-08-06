@@ -8,7 +8,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>SsmAdmin | Home</title>
+        <title>SsmAdmin</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <%@include file="/WEB-INF/view/include/includeCss.jsp" %></head>
@@ -151,7 +151,7 @@
                                         <div class="pull-left">
                                             <a href="#" class="btn btn-default btn-flat">Profile</a></div>
                                         <div class="pull-right">
-                                            <a href="#" class="btn btn-default btn-flat">Sign out</a></div>
+                                            <a href="logout.do" class="btn btn-default btn-flat">Sign out</a></div>
                                     </li>
                                 </ul>
                             </li>
@@ -207,8 +207,8 @@
                 <!-- To the right -->
                 <div class="pull-right hidden-xs">Anything you want</div>
                 <!-- Default to the left -->
-                <strong>Copyright &copy; 2016
-                    <a href="#">Company</a>.</strong>All rights reserved.</footer>
+                <strong>Copyright &copy; 2017
+                    <a href="https://github.com/JiaXiaohei/ssm-web">JiaXiaohei</a>.</strong>All rights reserved.</footer>
 
             <!-- Control Sidebar -->
             <aside class="control-sidebar control-sidebar-dark">
