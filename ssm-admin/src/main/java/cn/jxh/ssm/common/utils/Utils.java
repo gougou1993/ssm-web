@@ -1,8 +1,19 @@
 package cn.jxh.ssm.common.utils;
 
 import java.security.MessageDigest;
+import java.util.UUID;
 
 public class Utils {
+
+    /**
+     * 生成一个UUID
+     *
+     * @return UUID
+     */
+    public static String getUUID() {
+        String uuid = UUID.randomUUID().toString();
+        return uuid.replaceAll("-", "");
+    }
 
     /**
      * @param str      被转化字符串

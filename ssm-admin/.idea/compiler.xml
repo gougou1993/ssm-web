@@ -11,7 +11,7 @@
         <module name="ssm-web" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
+    <bytecodeTargetLevel target="1.7">
       <module name="ssm-admin" target="1.7" />
     </bytecodeTargetLevel>
   </component>

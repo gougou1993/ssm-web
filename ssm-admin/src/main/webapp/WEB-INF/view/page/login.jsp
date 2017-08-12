@@ -6,13 +6,13 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>SsmAdmin | Sign in</title>
+<title>SsmAdMin | Sign in</title>
 <%@include file="/WEB-INF/view/include/includeCss.jsp"%>
 </head>
 <body class="hold-transition login-page">
 	<div class="login-box">
 		<div class="login-logo">
-			<b>S</b>sm<b>A</b>dmin
+			<b>S</b>sm<b>A</b>d<b>M</b>in
 		</div>
 		<!-- /.login-logo -->
 		<div class="login-box-body">

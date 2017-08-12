@@ -68,68 +68,145 @@
     <!-- /.row -->
 </section>
 <script type="text/javascript">
-$(function() {
+var se_role_list_datatable;
 
-    var se_role_list_datatable;
-    var dataurl = "se_role_data_list.do";
-
-        se_role_list_datatable = $('#datatable').DataTable({
-            "processing": true,
-            "serverSide": true,
-            "language": lang,
-            "ajax": {
-                "url": dataurl,
-                "type": "POST"
-            },
-            "columns": [{
-                "data": "id"
-            },
-            {
-                "data": "roledesc",
-                "width": "30%"
-            },
-            {
-                "data": "content",
-                "width": "60%"
-            },
-            {
-                "data": "visible",
-                "render": function(data, type, full, meta) {
-                    return data == 1 ? "正常": "禁用";
-                },
-                "width": "10%"
-            }],
-            "order": [[0, "asc"]],
-            "dom": "<'row'<'#lefttool.col-xs-11 text-left'><'#righttool.col-xs-1 text-right'>r>" + "t" + "<'row'<'col-xs-2 text-left'i><'col-xs-8 text-center'p><'col-xs-2 text-right'l>>",
-            "initComplete": function() {
-                $("#lefttool").append('<div class="input-group"><span class="input-group-addon">角色名称</span><input name="roledesc" id="roledesc" class="form-control" type="text"></div>&nbsp');
-                $("#lefttool").append('<div class="input-group"><span class="input-group-addon">状态</span><select name="visible" id="visible" class="form-control"><option  value="1">正常</option><option  value="0">禁用</option></select></div>&nbsp');
-                $("#righttool").append('<button id="searchbutton" action_type="search" type="button" class="btn btn-primary btn-sm">查询</button>');
-                $('#searchbutton').click(function() {
-                    reload();
-                });
-            },
-            "columnDefs": [{"targets": [0],"visible": false}]
+se_role_list_datatable = $('#datatable').DataTable({
+    "processing": true,
+    "serverSide": true,
+    "language": lang,
+    "ajax": {
+        "url": "se_role_data_list.do",
+        "type": "POST"
+    },
+    "columns": [{
+        "data": "id"
+    },
+    {
+        "data": "roledesc",
+        "width": "30%"
+    },
+    {
+        "data": "content",
+        "width": "60%"
+    },
+    {
+        "data": "visible",
+        "render": function(data, type, full, meta) {
+            return data == 1 ? "正常": "禁用";
+        },
+        "width": "10%"
+    }],
+    "order": [[0, "asc"]],
+    "dom": "<'row'<'#lefttool.col-xs-8 text-left'><'#righttool.col-xs-4 text-right'>r>" + "t" + "<'row'<'col-xs-2 text-left'i><'col-xs-8 text-center'p><'col-xs-2 text-right'l>>",
+    "initComplete": function() {
+        $("#lefttool").append('<div class="input-group"><span class="input-group-addon">角色名称</span><input name="roledesc" id="roledesc" class="form-control" type="text"></div>&nbsp');
+        $("#lefttool").append('<div class="input-group"><span class="input-group-addon">状态</span><select name="visible" id="visible" class="form-control"><option  value=""></option><option  value="1">正常</option><option  value="0">禁用</option></select></div>&nbsp');
+        $("#righttool").append('<button id="searchbutton" action_type="search" type="button" class="btn btn-info btn-sm">查询</button>&nbsp');
+        $("#righttool").append('<button id="menubutton" action_type="search" type="button" class="btn btn-success btn-sm">关联菜单</button>&nbsp');
+        $("#righttool").append('<button id="userbutton" action_type="search" type="button" class="btn btn-success btn-sm">关联用户</button>&nbsp');
+        $("#righttool").append('<button id="addbutton" type="button" class="btn btn-primary btn-sm">新增</button>&nbsp');
+        $("#righttool").append('<button id="editbutton" type="button" class="btn btn-primary btn-sm">修改</button>&nbsp');
+        $("#righttool").append('<button id="delbutton" type="button" class="btn btn-primary btn-sm">删除</button>&nbsp');
+        $('#searchbutton').click(function() {
+            roleManage.reloadItemInit();
         });
-
-        $('#datatable tbody').on('click', 'tr',
-        function() {
-            if ($(this).hasClass('selected')) {
-                $(this).removeClass('selected');
-            } else {
-                se_role_list_datatable.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-            }
+        $('#menubutton').click(function() {
+            roleManage.menuItemInit();
         });
+        $('#userbutton').click(function() {
+            roleManage.userItemInit();
+        });
+        $('#addbutton').click(function() {
+            roleManage.addItemInit();
+        });
+        $('#editbutton').click(function() {
+            roleManage.editItemInit();
+        });
+        $('#delbutton').click(function() {
+            roleManage.delItemInit();
+        });
+    },
+    "columnDefs": [{
+        "targets": [0],
+        "visible": false
+    }]
+});
 
-    function reload() {
-        var param = {
-                "roledesc": $("#roledesc").val(),
-                "visible": $("#visible").val()
-            };
-    se_role_list_datatable.settings()[0].ajax.data = param;
-    se_role_list_datatable.ajax.reload();
-
+$('#datatable tbody').on('click', 'tr',
+function() {
+    if ($(this).hasClass('selected')) {
+        $(this).removeClass('selected');
+        roleManage.currentItem = null;
+    } else {
+        se_role_list_datatable.$('tr.selected').removeClass('selected');
+        $(this).addClass('selected');
+        roleManage.currentItem = se_role_list_datatable.row($(this).closest('tr')).data();
     }
 });
+
+var roleManage = {
+    currentItem: null,
+    reloadItemInit: function() {
+        var param = {
+            "roledesc": $("#roledesc").val(),
+            "visible": $("#visible").val()
+        };
+        se_role_list_datatable.settings()[0].ajax.data = param;
+        se_role_list_datatable.ajax.reload();
+    },
+    menuItemInit: function() {
+        if (!roleManage.currentItem) {
+            showWarm("未选中");
+            return;
+        }
+        pageBoxXY('se_role_menu.do?rolecode=' + roleManage.currentItem.rolecode, '512px', '430px');
+    },
+    userItemInit: function() {
+        if (!roleManage.currentItem) {
+            showWarm("未选中");
+            return;
+        }
+        pageBoxXY('se_role_user.do?rolecode=' + roleManage.currentItem.rolecode, '600px', '530px');
+    },
+    addItemInit: function() {
+        pageBoxXY('se_role_add.do', '512px', '430px');
+    },
+    editItemInit: function() {
+        if (!roleManage.currentItem) {
+            showWarm("未选中");
+            return;
+        }
+        pageBoxXY('se_role_edit.do?rolecode=' + roleManage.currentItem.rolecode, '512px', '430px');
+    },
+    delItemInit: function() {
+        if (!roleManage.currentItem) {
+            showWarm("未选中");
+            return;
+        }
+        layer.confirm('确认删除？ 删除后将无法恢复！', {
+            btn: ['确定', '取消']
+        },
+        function() {
+            $.ajax({
+                url: 'se_role_del_action.do?rolecode=' + roleManage.currentItem.rolecode,
+                type: "post",
+                async: false,
+                dataType: "json",
+                cache: false,
+                success: function(data) {
+                	roleManage.reloadItemInit();
+                    closeLoad();
+                    showSuccess(data.msg);
+                },
+                error: function(XmlHttpRequest, textStatus, errorThrown) {
+                	roleManage.reloadItemInit();
+                    closeLoad();
+                    showError(XmlHttpRequest, textStatus, errorThrown);
+                }
+            });
+        },
+        function() {});
+    }
+
+}
 </script>

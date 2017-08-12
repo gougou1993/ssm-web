@@ -41,7 +41,7 @@
 	
 	<delete id="delete">  
 		delete from se_role
-		where id = #{id}
+		where rolecode = #{rolecode}
 	</delete>
 	
 	<update id="update" parameterType="cn.jxh.ssm.entity.SeRole">  
@@ -56,7 +56,7 @@
 			<if test="updatetime != null"> updatetime = #{updatetime}, </if>
 			<if test="updateid != null"> updateid = #{updateid}, </if>
 		</set>
-		where id = #{id}
+		where rolecode = #{rolecode}
 	</update>
 	
 	<select id="get" parameterType="java.util.Map" resultMap="SeRole">  

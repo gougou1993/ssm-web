@@ -4,11 +4,11 @@
 <!DOCTYPE html>
 <!-- This is a starter template page. Use this page to start your new project from scratch. This page gets rid of all links and provides the needed markup only. -->
 <html>
-
+    <html lang="zh-CN">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>SsmAdmin</title>
+        <title>SsmAdMin</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <%@include file="/WEB-INF/view/include/includeCss.jsp" %></head>
@@ -25,7 +25,7 @@
                     <!-- logo for regular state and mobile devices -->
                     <span class="logo-lg">
                         <b>S</b>sm
-                        <b>A</b>dmin</span>
+                        <b>A</b>d<b>M</b>in</span>
                 </a>
                 <!-- Header Navbar -->
                 <nav class="navbar navbar-static-top" role="navigation">

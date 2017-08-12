@@ -130,6 +130,7 @@
 			<if test="updatetime != null"> and updatetime = #{updatetime} </if>
 			<if test="updateid != null"> and updateid = #{updateid} </if>
 		</where>
+		order by menuorder asc
 	</select>
 	
 	<select id="getCount" parameterType="java.util.Map" resultType="java.lang.Integer">  

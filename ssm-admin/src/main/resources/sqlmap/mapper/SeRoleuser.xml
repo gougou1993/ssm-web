@@ -36,7 +36,10 @@
 
     <delete id="delete">
         delete from se_roleuser
-        where id = #{id}
+        <where>
+            <if test="rolecode != null">and rolecode = #{rolecode}</if>
+            <if test="usercode != null">and usercode = #{usercode}</if>
+        </where>
     </delete>
 
     <update id="update" parameterType="cn.jxh.ssm.entity.SeRoleuser">
@@ -138,6 +141,50 @@
         where
         t2.usercode = #{usercode}
         and t1.visible = 1
+    </select>
+
+    <select id="listSeUserByRolecode" parameterType="java.util.Map" resultType="cn.jxh.ssm.entity.SeUser">
+        select
+        t1.id,
+        t1.usercode,
+        t1.pname,
+        t1.password,
+        t1.uname,
+        t1.birthym,
+        t1.pic,
+        t1.telcode,
+        t1.email,
+        t1.visible,
+        t1.entrytime,
+        t1.updatetime,
+        t1.updateid
+        from
+        se_roleuser t2 left join se_user t1 on
+        t1.usercode = t2.usercode
+        where
+        t2.rolecode = #{rolecode}
+        and t1.visible = 1
+    </select>
+
+    <select id="listSeUserByName" parameterType="java.util.Map" resultType="cn.jxh.ssm.entity.SeUser">
+        select
+        t1.id,
+        t1.usercode,
+        t1.pname,
+        t1.password,
+        t1.uname,
+        t1.birthym,
+        t1.pic,
+        t1.telcode,
+        t1.email,
+        t1.visible,
+        t1.entrytime,
+        t1.updatetime,
+        t1.updateid
+        from
+        se_user t1
+        where
+        t1.pname like concat('%',#{name},'%') or t1.uname like concat('%',#{name},'%')
     </select>
 
 </mapper>
