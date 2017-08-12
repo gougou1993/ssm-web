@@ -36,7 +36,10 @@
 
     <delete id="delete">
         delete from se_rolemenu
-        where id = #{id}
+        <where>
+            <if test="rolecode != null">and rolecode = #{rolecode}</if>
+            <if test="menucode != null">and menucode = #{menucode}</if>
+        </where>
     </delete>
 
     <update id="update" parameterType="cn.jxh.ssm.entity.SeRolemenu">

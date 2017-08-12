@@ -24,7 +24,7 @@
 					
 					<div class="box-body">
 						<div class="form-group">
-							<button type="button" class="btn btn-primary" onclick="submintForm('se_role_menuList.do?rolecode=${info.rolecode}');">保存</button>
+							<button type="button" class="btn btn-primary" onclick="submintForm();">保存</button>
 						</div>
 						<div class="box-body table-responsive">
 							<div class="col-xs-2">
@@ -83,19 +83,25 @@
 		});
 	});
 
-	function submintForm(url) {
+	function submintForm() {
+	    var rolecode = $("#rolecode").val();
 		var zTree = $.fn.zTree.getZTreeObj("menuTree");
 		var nodes = zTree.getCheckedNodes(true);
 		var menuIds = "";
 		for (var i = 0; i < nodes.length; i++) {
 			menuIds +=  nodes[i].menucode+",";
 		}
-		$("#editForm").ajaxSubmit({
+        menuIds=menuIds.substring(0,menuIds.length-1);
+        $.ajax({
 			type : 'post',
-			url : url,
+			url : 'se_role_menu_action.do',
+            async: false,
+            cache: false,
+            dataType: "json",
 			data : {
 				'action' : 'do',
-				'menuIds' : menuIds
+				'menuIds' : menuIds,
+				'rolecode':rolecode
 			},
 			beforeSubmit : function() {
 				//验证checkbox是否为空
@@ -106,7 +112,6 @@
 				//提交加载层
 				showLoad();
 			},
-			dataType : "json",
 			success : function(data) {
 				closeLoad();
 				showSuccess(data.msg);

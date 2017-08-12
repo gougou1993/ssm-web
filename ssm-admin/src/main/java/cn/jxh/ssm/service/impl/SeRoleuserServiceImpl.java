@@ -55,7 +55,7 @@ public class SeRoleuserServiceImpl extends BaseServiceImpl<SeRoleuser,SeRoleuser
 
 		seRoleuserMapper.delete(param);
 
-		for(int i=0;i<userList.length;i++){
+		for(String usercode :userList){
 			SeRoleuser seRoleuser = new SeRoleuser();
 			//获取squ顺序编号
 			Long seqid = seqMapper.getSeqPurNextVal();
@@ -63,7 +63,7 @@ public class SeRoleuserServiceImpl extends BaseServiceImpl<SeRoleuser,SeRoleuser
 
 			seRoleuser.setId(seqid);
 			seRoleuser.setRolecode(String.valueOf(param.get("rolecode")));
-			seRoleuser.setUsercode(userList[i]);
+			seRoleuser.setUsercode(usercode);
 			seRoleuser.setEntrytime(nowDate);
 			seRoleuser.setUpdatetime(nowDate);
 			seRoleuser.setUpdateid(seqid);

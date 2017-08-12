@@ -298,4 +298,32 @@ public class SeRoleController extends BaseController {
 
     }
 
+    @RequestMapping(value = "/se_role_menu_action.do", method = {RequestMethod.POST}, produces = "application/json")
+    @ResponseBody
+    public String seRoleMenuActionHander(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+        Map<String, Object> info = new HashMap<>();
+        Map<String, Object> param = new HashMap<>();
+
+        String action = request.getParameter("action");
+        String rolecode = request.getParameter("rolecode");
+        String menuIds = request.getParameter("menuIds");
+
+        if ("do".equals(action)) {
+            try {
+                if (!Utils.strIsNull(rolecode)) {
+                    param.put("menuIds", menuIds);
+                    param.put("rolecode", rolecode);
+                    seRolemenuService.relationRoleMenu(param);
+                }
+                info.put("status", 1);
+                info.put("msg", "操作成功");
+            } catch (Exception e) {
+                info.put("status", 0);
+                info.put("msg", "操作失败" + e.getLocalizedMessage());
+            }
+        }
+
+        return JSON.toJSONString(info, WriteNullStringAsEmpty);
+    }
+
 }

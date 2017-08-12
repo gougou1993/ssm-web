@@ -10,4 +10,6 @@ public interface ISeRolemenuService extends IBaseService<SeRolemenu> {
 
     List<SeMenu> listSeMenuByUsercode(Map<String, Object> param);
 
+    void relationRoleMenu(Map<String, Object> param);
+
 }
