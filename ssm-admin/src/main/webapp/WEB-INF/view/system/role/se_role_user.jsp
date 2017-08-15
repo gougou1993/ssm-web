@@ -94,6 +94,7 @@ function submintForm() {
             text += "," + list.options[i].text;
         }
     }
+    alert(vlaues);
     $.ajax({
         type: 'post',
         url: "se_role_user_action.do",

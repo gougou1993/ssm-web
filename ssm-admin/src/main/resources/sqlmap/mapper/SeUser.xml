@@ -59,7 +59,7 @@
 	
 	<delete id="delete">  
 		delete from se_user
-		where id = #{id}
+		where usercode = #{usercode}
 	</delete>
 	
 	<update id="update" parameterType="cn.jxh.ssm.entity.SeUser">  
@@ -79,7 +79,7 @@
 			<if test="updatetime != null"> updatetime = #{updatetime}, </if>
 			<if test="updateid != null"> updateid = #{updateid}, </if>
 		</set>
-		where id = #{id}
+		where usercode = #{usercode}
 	</update>
 	
 	<select id="get" parameterType="java.util.Map" resultMap="SeUser">  
@@ -153,9 +153,9 @@
 		<where>
 			<if test="id != null"> and id = #{id} </if>
 			<if test="usercode != null"> and usercode = #{usercode} </if>
-			<if test="pname != null"> and pname = #{pname} </if>
+			<if test="pname != null"> and pname like concat('%',#{pname},'%') </if>
 			<if test="password != null"> and password = #{password} </if>
-			<if test="uname != null"> and uname = #{uname} </if>
+			<if test="uname != null"> and uname like concat('%',#{uname},'%') </if>
 			<if test="birthym != null"> and birthym = #{birthym} </if>
 			<if test="pic != null"> and pic = #{pic} </if>
 			<if test="telcode != null"> and telcode = #{telcode} </if>
@@ -187,9 +187,9 @@
 		<where>
 			<if test="id != null"> and id = #{id} </if>
 			<if test="usercode != null"> and usercode = #{usercode} </if>
-			<if test="pname != null"> and pname = #{pname} </if>
+			<if test="pname != null"> and pname like concat('%',#{pname},'%') </if>
 			<if test="password != null"> and password = #{password} </if>
-			<if test="uname != null"> and uname = #{uname} </if>
+			<if test="uname != null"> and uname like concat('%',#{uname},'%') </if>
 			<if test="birthym != null"> and birthym = #{birthym} </if>
 			<if test="pic != null"> and pic = #{pic} </if>
 			<if test="telcode != null"> and telcode = #{telcode} </if>
@@ -199,6 +199,9 @@
 			<if test="updatetime != null"> and updatetime = #{updatetime} </if>
 			<if test="updateid != null"> and updateid = #{updateid} </if>
 		</where>
+		<if test="ordercolumn != null and ordercolumn!=''">
+			order by ${ordercolumn} ${orderdir}
+		</if>
 		limit #{pagesize} offset #{startrow} 
 	</select>
 

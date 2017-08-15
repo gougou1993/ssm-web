@@ -75,7 +75,7 @@ se_role_list_datatable = $('#datatable').DataTable({
     "serverSide": true,
     "language": lang,
     "ajax": {
-        "url": "se_role_data_list.do",
+        "url": "se_role_list_data.do",
         "type": "POST"
     },
     "columns": [{

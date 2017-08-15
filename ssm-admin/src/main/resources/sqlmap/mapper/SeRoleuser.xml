@@ -163,7 +163,6 @@
         t1.usercode = t2.usercode
         where
         t2.rolecode = #{rolecode}
-        and t1.visible = 1
     </select>
 
     <select id="listSeUserByName" parameterType="java.util.Map" resultType="cn.jxh.ssm.entity.SeUser">

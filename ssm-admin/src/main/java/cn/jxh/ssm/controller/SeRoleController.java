@@ -40,14 +40,14 @@ public class SeRoleController extends BaseController {
     private ISeRolemenuService seRolemenuService;
 
     @RequestMapping(value = "/se_role_list.do")
-    public ModelAndView seRoleListHandler(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws ServletException {
+    public ModelAndView seRoleListPageHandler(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws ServletException {
         Map<String, Object> info = new HashMap<String, Object>();
         return new ModelAndView("system/role/se_role_list", "info", info);
     }
 
-    @RequestMapping(value = "/se_role_data_list.do", method = {RequestMethod.POST}, produces = "application/json")
+    @RequestMapping(value = "/se_role_list_data.do", method = {RequestMethod.POST}, produces = "application/json")
     @ResponseBody
-    public String seRoleDataListHandler(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws ServletException {
+    public String seRoleListDataHandler(HttpServletRequest request, HttpServletResponse response, ModelMap model) throws ServletException {
         PageProperty pp = new PageProperty();
         String[] enableSorts = {"id", "roledesc", "content", "visible"};
 

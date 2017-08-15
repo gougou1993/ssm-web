@@ -42,6 +42,19 @@ public class Utils {
     }
 
     /**
+     * @param str      被转化字符串
+     * @param defValue 转化失败后的默认值
+     * @return
+     */
+    public static Long parseLong(String str, Long defValue) {
+        try {
+            return Long.parseLong(str);
+        } catch (Exception e) {
+            return defValue;
+        }
+    }
+
+    /**
      * 判断字符串是否为空
      *
      * @param str
