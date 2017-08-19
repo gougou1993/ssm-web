@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:motan="http://api.weibo.com/schema/motan"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd">
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:motan.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 注册中心配置 使用不同注册中心需要依赖对应的jar包。-->
+    <motan:registry regProtocol="zookeeper" name="registry" address="${motan.service.address}"/>
+
+    <!-- motan协议配置 -->
+    <motan:protocol default="true" name="motan" haStrategy="failfast" loadbalance="configurableWeight"/>
+
+    <!-- 通用referer基础配置 -->
+    <motan:basicReferer id="clientBasicConfig" registry="registry"  protocol="motan" throwException="false" retries="${motan.service.retries}" requestTimeout="${motan.service.timeout}"/>
+
+    <motan:referer id="baseService" interface="cn.jxh.ssm.service.IBaseService" basicReferer="clientBasicConfig"/>
+
+    <motan:referer id="seMenuService" interface="cn.jxh.ssm.service.ISeMenuService" basicReferer="clientBasicConfig"/>
+
+    <motan:referer id="seqService" interface="cn.jxh.ssm.service.ISeqService" basicReferer="clientBasicConfig"/>
+
+    <motan:referer id="seRolemenuService" interface="cn.jxh.ssm.service.ISeRolemenuService" basicReferer="clientBasicConfig"/>
+
+    <motan:referer id="seRoleService" interface="cn.jxh.ssm.service.ISeRoleService" basicReferer="clientBasicConfig"/>
+
+    <motan:referer id="seRoleuserService" interface="cn.jxh.ssm.service.ISeRoleuserService" basicReferer="clientBasicConfig"/>
+
+    <motan:referer id="seUserService" interface="cn.jxh.ssm.service.ISeUserService" basicReferer="clientBasicConfig"/>
+
+</beans>
