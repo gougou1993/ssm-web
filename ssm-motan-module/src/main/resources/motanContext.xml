@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:motan="http://api.weibo.com/schema/motan"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://api.weibo.com/schema/motan http://api.weibo.com/schema/motan.xsd">
+
+    <!-- 注册中心配置 使用不同注册中心需要依赖对应的jar包。如果不使用注册中心，可以把check属性改为false，忽略注册失败。-->
+    <motan:registry regProtocol="zookeeper" name="registry" address="${motan.service.address}"/>
+
+    <!-- 协议配置。为防止多个业务配置冲突，推荐使用id表示具体协议。-->
+    <motan:protocol id="ssmMotan" default="true" name="motan"/>
+
+    <!-- 通用配置，多个rpc服务使用相同的基础配置. group和module定义具体的服务池。export格式为“protocol id:提供服务的端口”-->
+    <motan:basicService id="serviceBasicConfig" registry="registry" export="${motan.service.port}" accessLog="false"  shareChannel="true"/>
+
+    <bean id="baseServiceImpl" class="cn.jxh.ssm.service.impl.BaseServiceImpl"/>
+    <motan:service interface="cn.jxh.ssm.service.IBaseService" ref="baseServiceImpl"
+                   basicService="serviceBasicConfig"></motan:service>
+
+    <bean id="seMenuServiceImpl" class="cn.jxh.ssm.service.impl.SeMenuServiceImpl"/>
+    <motan:service interface="cn.jxh.ssm.service.ISeMenuService" ref="seMenuServiceImpl"
+                   basicService="serviceBasicConfig"></motan:service>
+
+    <bean id="seqServiceImpl" class="cn.jxh.ssm.service.impl.SeqServiceImpl"/>
+    <motan:service interface="cn.jxh.ssm.service.ISeqService" ref="seqServiceImpl"
+                   basicService="serviceBasicConfig"></motan:service>
+
+    <bean id="seRolemenuServiceImpl" class="cn.jxh.ssm.service.impl.SeRolemenuServiceImpl"/>
+    <motan:service interface="cn.jxh.ssm.service.ISeRolemenuService" ref="seRolemenuServiceImpl"
+                   basicService="serviceBasicConfig"></motan:service>
+
+    <bean id="seRoleServiceImpl" class="cn.jxh.ssm.service.impl.SeRoleServiceImpl"/>
+    <motan:service interface="cn.jxh.ssm.service.ISeRoleService" ref="seRoleServiceImpl"
+                   basicService="serviceBasicConfig"></motan:service>
+
+    <bean id="seRoleuserServiceImpl" class="cn.jxh.ssm.service.impl.SeRoleuserServiceImpl"/>
+    <motan:service interface="cn.jxh.ssm.service.ISeRoleuserService" ref="seRoleuserServiceImpl"
+                   basicService="serviceBasicConfig"></motan:service>
+    <bean id="seUserServiceImpl" class="cn.jxh.ssm.service.impl.SeUserServiceImpl"/>
+    <motan:service interface="cn.jxh.ssm.service.ISeUserService" ref="seUserServiceImpl"
+                   basicService="serviceBasicConfig"></motan:service>
+
+</beans>

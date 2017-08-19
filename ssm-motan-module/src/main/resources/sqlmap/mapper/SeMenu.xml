@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jxh.ssm.mapper.SeMenuMapper">
+
+	<resultMap id="SeMenu" type="cn.jxh.ssm.entity.SeMenu">
+		<result property="id" column="id"/>
+		<result property="menucode" column="menucode"/>
+		<result property="parentcode" column="parentcode"/>
+		<result property="captionname" column="captionname"/>
+		<result property="menuorder" column="menuorder"/>
+		<result property="sourceurl" column="sourceurl"/>
+		<result property="classname" column="classname"/>
+		<result property="visible" column="visible"/>
+		<result property="entrytime" column="entrytime"/>
+		<result property="updatetime" column="updatetime"/>
+		<result property="updateid" column="updateid"/>
+	</resultMap>
+	
+	
+
+
+	<insert id="insert" parameterType="cn.jxh.ssm.entity.SeMenu" useGeneratedKeys="true" keyProperty="id">
+		insert into se_menu ( 
+			<trim prefixOverrides=",">
+			<if test="id != null"> ,id </if>	
+			<if test="menucode != null"> ,menucode </if>	
+			<if test="parentcode != null"> ,parentcode </if>	
+			<if test="captionname != null"> ,captionname </if>	
+			<if test="menuorder != null"> ,menuorder </if>	
+			<if test="sourceurl != null"> ,sourceurl </if>	
+			<if test="classname != null"> ,classname </if>	
+			<if test="visible != null"> ,visible </if>	
+			<if test="entrytime != null"> ,entrytime </if>	
+			<if test="updatetime != null"> ,updatetime </if>	
+			<if test="updateid != null"> ,updateid </if>	
+			</trim>
+		) values (
+			<trim prefixOverrides=",">
+			<if test="id != null"> ,#{id} </if>		       
+			<if test="menucode != null"> ,#{menucode} </if>		       
+			<if test="parentcode != null"> ,#{parentcode} </if>		       
+			<if test="captionname != null"> ,#{captionname} </if>		       
+			<if test="menuorder != null"> ,#{menuorder} </if>		       
+			<if test="sourceurl != null"> ,#{sourceurl} </if>		       
+			<if test="classname != null"> ,#{classname} </if>		       
+			<if test="visible != null"> ,#{visible} </if>		       
+			<if test="entrytime != null"> ,#{entrytime} </if>		       
+			<if test="updatetime != null"> ,#{updatetime} </if>		       
+			<if test="updateid != null"> ,#{updateid} </if>		       
+			</trim>
+		)
+	</insert>
+	
+	<delete id="delete">  
+		delete from se_menu
+		where menucode = #{menucode}
+	</delete>
+	
+	<update id="update" parameterType="cn.jxh.ssm.entity.SeMenu">  
+		update se_menu        
+		<set>
+			<if test="id != null"> id = #{id}, </if>
+			<if test="menucode != null"> menucode = #{menucode}, </if>
+			<if test="parentcode != null"> parentcode = #{parentcode}, </if>
+			<if test="captionname != null"> captionname = #{captionname}, </if>
+			<if test="menuorder != null"> menuorder = #{menuorder}, </if>
+			<if test="sourceurl != null"> sourceurl = #{sourceurl}, </if>
+			<if test="classname != null"> classname = #{classname}, </if>
+			<if test="visible != null"> visible = #{visible}, </if>
+			<if test="entrytime != null"> entrytime = #{entrytime}, </if>
+			<if test="updatetime != null"> updatetime = #{updatetime}, </if>
+			<if test="updateid != null"> updateid = #{updateid}, </if>
+		</set>
+		where menucode = #{menucode}
+	</update>
+	
+	<select id="get" parameterType="java.util.Map" resultMap="SeMenu">  
+		select 
+			id,
+			menucode,
+			parentcode,
+			captionname,
+			menuorder,
+			sourceurl,
+			classname,
+			visible,
+			entrytime,
+			updatetime,
+			updateid
+		from se_menu
+		<where>
+			<if test="id != null"> and id = #{id} </if>
+			<if test="menucode != null"> and menucode = #{menucode} </if>
+			<if test="parentcode != null"> and parentcode = #{parentcode} </if>
+			<if test="captionname != null"> and captionname = #{captionname} </if>
+			<if test="menuorder != null"> and menuorder = #{menuorder} </if>
+			<if test="sourceurl != null"> and sourceurl = #{sourceurl} </if>
+			<if test="classname != null"> and classname = #{classname} </if>
+			<if test="visible != null"> and visible = #{visible} </if>
+			<if test="entrytime != null"> and entrytime = #{entrytime} </if>
+			<if test="updatetime != null"> and updatetime = #{updatetime} </if>
+			<if test="updateid != null"> and updateid = #{updateid} </if>
+		</where>
+	</select>
+	
+	<select id="list" parameterType="java.util.Map" resultMap="SeMenu">  
+		select 
+			id,
+			menucode,
+			parentcode,
+			captionname,
+			menuorder,
+			sourceurl,
+			classname,
+			visible,
+			entrytime,
+			updatetime,
+			updateid
+		from se_menu
+		<where>
+			<if test="id != null"> and id = #{id} </if>
+			<if test="menucode != null"> and menucode = #{menucode} </if>
+			<if test="parentcode != null"> and parentcode = #{parentcode} </if>
+			<if test="captionname != null"> and captionname = #{captionname} </if>
+			<if test="menuorder != null"> and menuorder = #{menuorder} </if>
+			<if test="sourceurl != null"> and sourceurl = #{sourceurl} </if>
+			<if test="classname != null"> and classname = #{classname} </if>
+			<if test="visible != null"> and visible = #{visible} </if>
+			<if test="entrytime != null"> and entrytime = #{entrytime} </if>
+			<if test="updatetime != null"> and updatetime = #{updatetime} </if>
+			<if test="updateid != null"> and updateid = #{updateid} </if>
+		</where>
+		order by menuorder asc
+	</select>
+	
+	<select id="getCount" parameterType="java.util.Map" resultType="java.lang.Integer">  
+		select count(*) from se_menu
+		<where>
+			<if test="id != null"> and id = #{id} </if>
+			<if test="menucode != null"> and menucode = #{menucode} </if>
+			<if test="parentcode != null"> and parentcode = #{parentcode} </if>
+			<if test="captionname != null"> and captionname = #{captionname} </if>
+			<if test="menuorder != null"> and menuorder = #{menuorder} </if>
+			<if test="sourceurl != null"> and sourceurl = #{sourceurl} </if>
+			<if test="classname != null"> and classname = #{classname} </if>
+			<if test="visible != null"> and visible = #{visible} </if>
+			<if test="entrytime != null"> and entrytime = #{entrytime} </if>
+			<if test="updatetime != null"> and updatetime = #{updatetime} </if>
+			<if test="updateid != null"> and updateid = #{updateid} </if>
+		</where>
+	</select>
+
+
+	<select id="getSplitList" parameterType="java.util.Map" resultMap="SeMenu" >  
+		select 
+			id,
+			menucode,
+			parentcode,
+			captionname,
+			menuorder,
+			sourceurl,
+			classname,
+			visible,
+			entrytime,
+			updatetime,
+			updateid
+		from se_menu
+		<where>
+			<if test="id != null"> and id = #{id} </if>
+			<if test="menucode != null"> and menucode = #{menucode} </if>
+			<if test="parentcode != null"> and parentcode = #{parentcode} </if>
+			<if test="captionname != null"> and captionname = #{captionname} </if>
+			<if test="menuorder != null"> and menuorder = #{menuorder} </if>
+			<if test="sourceurl != null"> and sourceurl = #{sourceurl} </if>
+			<if test="classname != null"> and classname = #{classname} </if>
+			<if test="visible != null"> and visible = #{visible} </if>
+			<if test="entrytime != null"> and entrytime = #{entrytime} </if>
+			<if test="updatetime != null"> and updatetime = #{updatetime} </if>
+			<if test="updateid != null"> and updateid = #{updateid} </if>
+		</where>
+		<if test="ordercolumn != null and ordercolumn!=''">
+			order by ${ordercolumn} ${orderdir}
+		</if>
+		limit #{pagesize} offset #{startrow} 
+	</select>
+
+
+</mapper>
