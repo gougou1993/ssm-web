@@ -21,7 +21,7 @@ public class MenuTree {
         for (SeMenu seMenu : seMenusList) {
             if (seMenu.getParentcode().equals(rootSeMenu.getMenucode())) {
                 if (!getChildren(seMenu).isEmpty()) {
-                    html.append("<li class=\"treeview\">");
+                    html.append("<li id=\"menu_" + seMenu.getMenucode() + "\" class=\"treeview\">");
                     html.append("\r\n<a href=\"#\" > <i class=\"" + seMenu.getClassname() + "\"></i><span>" + seMenu.getCaptionname() + "</span> <span class=\"pull-right-container\"> <i class=\"fa fa-angle-left pull-right\"></i> </span> </a>");
                     build(seMenu);
                     html.append("\r\n</li>");

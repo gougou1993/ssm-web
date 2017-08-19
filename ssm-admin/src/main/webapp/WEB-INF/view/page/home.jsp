@@ -359,6 +359,11 @@
             <div class="control-sidebar-bg"></div>
         </div>
         <!-- ./wrapper -->
-        <%@include file="/WEB-INF/view/include/includeJs.jsp" %></body>
-
+<%@include file="/WEB-INF/view/include/includeJs.jsp" %></body>
+<script type="text/javascript">
+$(document).ready(function() {
+    $("#menu_${firstMenu.parentcode} a:first").click();
+    setTimeout(function(){$("#menu_${firstMenu.menucode} a:first").click();}, 500);
+});
+</script>
 </html>

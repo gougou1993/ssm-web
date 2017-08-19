@@ -2,6 +2,7 @@ package cn.jxh.ssm.controller;
 
 import cn.jxh.ssm.common.constants.SysConstants;
 import cn.jxh.ssm.common.utils.MenuTree;
+import cn.jxh.ssm.common.utils.Utils;
 import cn.jxh.ssm.entity.SeMenu;
 import cn.jxh.ssm.entity.SeRole;
 import cn.jxh.ssm.entity.SessionUser;
@@ -43,8 +44,15 @@ public class PageController extends BaseController {
                 SeMenu rootSeMenu = listUserMenu.remove(0);
                 MenuTree tree = new MenuTree(rootSeMenu,listUserMenu);
                 model.put("listUserMenu", tree.buildTree());
-                model.put("url", listUserMenu.get(0));
             }
+
+            for(SeMenu seMenu : listUserMenu){
+                if(!Utils.strIsNull(seMenu.getSourceurl())){
+                    model.put("firstMenu", seMenu);
+                    break;
+                }
+            }
+
         }
         return "page/home";
     }
