@@ -2,16 +2,13 @@
 <%@ include file="/WEB-INF/view/include/includeTag.jsp"%>
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <title>关联菜单</title>
         <%@include file="/WEB-INF/view/include/includeCss.jsp" %>
         <link rel="stylesheet" href="resources/plugins/zTree_v3-3.5.24/css/metroStyle/metroStyle.css" type="text/css"></link>
-
     </head>
-
 <body class="hold-transition skin-blue sidebar-mini">
 	<div class="row">
 		<div class="col-md-12">

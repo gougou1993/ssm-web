@@ -53,7 +53,7 @@
 	
 	<delete id="delete">  
 		delete from se_menu
-		where id = #{id}
+		where menucode = #{menucode}
 	</delete>
 	
 	<update id="update" parameterType="cn.jxh.ssm.entity.SeMenu">  
@@ -71,7 +71,7 @@
 			<if test="updatetime != null"> updatetime = #{updatetime}, </if>
 			<if test="updateid != null"> updateid = #{updateid}, </if>
 		</set>
-		where id = #{id}
+		where menucode = #{menucode}
 	</update>
 	
 	<select id="get" parameterType="java.util.Map" resultMap="SeMenu">  
@@ -178,6 +178,9 @@
 			<if test="updatetime != null"> and updatetime = #{updatetime} </if>
 			<if test="updateid != null"> and updateid = #{updateid} </if>
 		</where>
+		<if test="ordercolumn != null and ordercolumn!=''">
+			order by ${ordercolumn} ${orderdir}
+		</if>
 		limit #{pagesize} offset #{startrow} 
 	</select>
 

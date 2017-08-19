@@ -64,8 +64,8 @@ public class SeUserController extends BaseController {
         }
 
         setPageInfo(request, pp, enableSorts);
-        PageList<SeUser> seRoleList = seUserService.getPageList(pp);
-        return JSON.toJSONString(seRoleList, WriteNullStringAsEmpty);
+        PageList<SeUser> seUserList = seUserService.getPageList(pp);
+        return JSON.toJSONString(seUserList, WriteNullStringAsEmpty);
     }
 
     @RequestMapping(value = "/se_user_add.do")
