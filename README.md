@@ -1,18 +1,18 @@
 # ssm-web
-SpringMVC+Spring+MyBatis+Druid+PostgreSQL+AdminLTE+Maven+Motan
+SpringMVC+Spring+MyBatis+Druid+PostgreSQL+AdminLTE+Maven+Motan框架集成 
 
 ##  介绍
 
 ### ssm-blank
 空框架
 
-### ssm-admin [开发中]
+### ssm-admin
 带有基本权限管理模块
 
-### ssm-motan-web [计划中]
+### ssm-motan-web
 ssm-admin 基于motan剥离的前端
 
-### ssm-motan-module [计划中]
+### ssm-motan-module
 ssm-admin 基于motan剥离的服务端
 
 ##  开发环境
