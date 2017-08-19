@@ -24,3 +24,7 @@ hs_err_pid*
 /ssm-blank/logs
 /ssm-admin/target
 /ssm-admin/logs
+/ssm-motan-web/target
+/ssm-motan-web/logs
+/ssm-motan-module/target
+/ssm-motan-module/logs
