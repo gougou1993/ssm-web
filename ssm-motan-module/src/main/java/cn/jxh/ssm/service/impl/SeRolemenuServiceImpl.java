@@ -3,15 +3,14 @@ package cn.jxh.ssm.service.impl;
 
 import cn.jxh.ssm.common.utils.Utils;
 import cn.jxh.ssm.entity.SeMenu;
-import cn.jxh.ssm.entity.SeRoleuser;
 import cn.jxh.ssm.mapper.SeqMapper;
+import cn.jxh.ssm.service.ISeRolemenuService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.jxh.ssm.mapper.SeRolemenuMapper;
 import cn.jxh.ssm.entity.SeRolemenu;
-import cn.jxh.ssm.service.ISeRolemenuService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;

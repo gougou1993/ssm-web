@@ -4,15 +4,14 @@ package cn.jxh.ssm.service.impl;
 import cn.jxh.ssm.common.utils.Utils;
 import cn.jxh.ssm.entity.SeRole;
 import cn.jxh.ssm.entity.SeUser;
-import cn.jxh.ssm.mapper.SeRoleMapper;
 import cn.jxh.ssm.mapper.SeqMapper;
+import cn.jxh.ssm.service.ISeRoleuserService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.jxh.ssm.mapper.SeRoleuserMapper;
 import cn.jxh.ssm.entity.SeRoleuser;
-import cn.jxh.ssm.service.ISeRoleuserService;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;

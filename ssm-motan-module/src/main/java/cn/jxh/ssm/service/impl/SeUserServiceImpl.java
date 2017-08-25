@@ -2,13 +2,13 @@ package cn.jxh.ssm.service.impl;
 
 
 import cn.jxh.ssm.mapper.SeRoleuserMapper;
+import cn.jxh.ssm.service.ISeUserService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.jxh.ssm.mapper.SeUserMapper;
 import cn.jxh.ssm.entity.SeUser;
-import cn.jxh.ssm.service.ISeUserService;
 
 import java.util.Map;
 
