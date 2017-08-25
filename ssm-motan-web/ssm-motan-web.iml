@@ -71,5 +71,6 @@
     <orderEntry type="library" name="Maven: org.apache.zookeeper:zookeeper:3.4.9" level="project" />
     <orderEntry type="library" name="Maven: jline:jline:0.9.94" level="project" />
     <orderEntry type="library" name="Maven: io.netty:netty:3.10.5.Final" level="project" />
+    <orderEntry type="library" name="Maven: cn.jxh.web:ssm-motan-api:1.0-SNAPSHOT" level="project" />
   </component>
 </module>
