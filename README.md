@@ -15,6 +15,9 @@ ssm-admin 基于motan剥离的前端
 ### ssm-motan-module
 ssm-admin 基于motan剥离的服务端
 
+### ssm-motan-api
+ssm-admin-web/module接口、实体类、工具类
+
 ##  开发环境
 ```
 jdk1.7.0_80
