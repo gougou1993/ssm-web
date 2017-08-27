@@ -28,3 +28,5 @@ hs_err_pid*
 /ssm-motan-web/logs
 /ssm-motan-module/target
 /ssm-motan-module/logs
+/ssm-motan-api/target
+/ssm-motan-api/logs
